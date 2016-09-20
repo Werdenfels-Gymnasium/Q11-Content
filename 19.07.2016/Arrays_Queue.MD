@@ -4,13 +4,22 @@
 ```java
 public class Warteschlange {
   
-  String[] teilnehmer = new String[15];
-  int laenge = 0;
+  private String[] teilnehmer;
+  private int laenge = 0;
+  
+  public Warteschlange(int maxLaenge) {
+    teilnehmer = new String[maxLaenge];
+  }
+  
+  public void vorneVerlassen() {
+    verlassen(0);
+  }
   
   public void verlassen(int index) {
-    for (int i = index + 1; i < laenge) {
-      teilnehmer[i] = teilnehmer[i - 1];
+    for (int i = index; i < laenge; i++) {
+      teilnehmer[i] = teilnehmer[i + 1];
     }
+    teilnehmer[laenge - 1] = null;
     laenge--;
   }
   
