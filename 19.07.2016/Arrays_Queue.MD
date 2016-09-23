@@ -29,3 +29,10 @@ public class Warteschlange {
   }
 }
 ```
+> Probleme der Implementierung einer Warteschlange durch ein Feld:
+- Es wird zu viel oder zu wenig Speicherplatz reserviert
+- viele unnötige Iterationen
+
+> Verarbeitungsprinzipien:
+- **FIFO**: first in first out -> Kioskwarteschlange; Verkehrskontrolle
+- **LIFO**: last in first out -> Fähre mit einem Eingang; Skigondel; Pfannkuchenbacken
