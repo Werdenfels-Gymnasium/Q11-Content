@@ -27,6 +27,17 @@ public class Warteschlange {
     teilnehmer[laenge] = neuerTeilnehmer;
     laenge++;
   }
+  
+  public void vordraengeln(int index, int amount) {
+    String previous = teilnehmer[index];
+
+    for (int i = index - amount; i < laenge; i++) {
+      teilnehmer[i + 1] = teilnehmer[i];
+    }
+
+    teilnehmer[index - amount] = previous;
+
+  }
 }
 ```
 > Probleme der Implementierung einer Warteschlange durch ein Feld:
