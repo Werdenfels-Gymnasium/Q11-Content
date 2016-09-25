@@ -31,8 +31,8 @@ public class Warteschlange {
   public void vordraengeln(int index, int amount) {
     String previous = teilnehmer[index];
 
-    for (int i = index - amount; i < laenge; i++) {
-      teilnehmer[i + 1] = teilnehmer[i];
+    for (int i = index; i >= index - amount ; i--) {
+      teilnehmer[i] = teilnehmer[i - 1];
     }
 
     teilnehmer[index - amount] = previous;
