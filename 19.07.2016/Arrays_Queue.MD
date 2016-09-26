@@ -29,14 +29,21 @@ public class Warteschlange {
   }
   
   public void vordraengeln(int index, int amount) {
+    if (amount <= index && index <= laenge - 1) {
     String previous = teilnehmer[index];
 
-    for (int i = index; i >= index - amount ; i--) {
+    for (int i = index; i > index - amount ; i--) {
       teilnehmer[i] = teilnehmer[i - 1];
     }
 
     teilnehmer[index - amount] = previous;
-
+   }
+   else if (index > laenge - 1) {
+    System.out.println ("Hier steht niemand mehr an!");
+   }
+   else {
+    System.out.println (teilnehmer[index] + " kann sich nicht um " + amount + " nach vorne drängeln!");
+   }
   }
 }
 ```
