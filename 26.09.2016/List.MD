@@ -152,9 +152,9 @@ public class TEST {
   
   public static void main(String[] args) {
     LOKOMOTIVE lok = new LOKOMOTIVE(knoten1);
-    System.out.println("Der Wagen + wagon2.wagonArtGeben() + " wurde angehängt: " + lok.wagonAnhaengen(wagon2));
-    System.out.println("Der Wagen + wagon2.wagonArtGeben() + " ist im Zug enthalten: " + lok.enthaeltWagon(wagon2));
-    System.out.println("Der Wagen + wagon2.wagonArtGeben() + " wurde abgekuppelt: " + lok.wagonAbkuppeln(wagon2));
+    System.out.println("Der Wagen + wagon2.wagonArtGeben() " + wurde angehängt: " + lok.wagonAnhaengen(wagon2));
+    System.out.println("Der Wagen + wagon2.wagonArtGeben() " + ist im Zug enthalten: " + lok.enthaeltWagon(wagon2));
+    System.out.println("Der Wagen + wagon2.wagonArtGeben() " + wurde abgekuppelt: " + lok.wagonAbkuppeln(wagon2));
     System.out.println("Der Wagen an 0. Stelle ist: " + lok.wagonGeben(0);
   }
 }
