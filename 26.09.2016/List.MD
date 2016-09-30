@@ -185,6 +185,6 @@ public class TEST {
     public BAHNWAGON pass = new BAHNWAGON("Passagierwagon");
     public BAHNWAGON last = new BAHNWAGON("Lastwagon");
     public BAHNWAGON gueter = new BAHNWAGON("Gueterwagon");
-    public LOKOMOTIVE eLok = new LOKOMOTIVE("E-Lok");
+    public ZUG zug = new ZUG("E-Lok");
 }
 ```
