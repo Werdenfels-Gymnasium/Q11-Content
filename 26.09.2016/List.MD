@@ -157,7 +157,7 @@ public class TEST {
     System.out.println("Der Wagen " + wagon2.wagonArtGeben() + " wurde angehängt: " + lok.wagonAnhaengen(wagon2));
     System.out.println("Der Wagen " + wagon2.wagonArtGeben() + " ist im Zug enthalten: " + lok.enthaeltWagon(wagon2));
     System.out.println("Der Wagen " + wagon2.wagonArtGeben() + " wurde abgekuppelt: " + lok.wagonAbkuppeln(wagon2));
-    System.out.println("Der Wagen an 0. Stelle ist: " + lok.bahnwagonGeben(0).wagonArtGeben();
+    System.out.println("Der Wagen an 0. Stelle ist: " + lok.bahnwagonGeben(0).wagonArtGeben());
   }
 }
 ```
