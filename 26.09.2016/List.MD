@@ -146,16 +146,18 @@ public class LOKOMOTIVE {
 ```java
 public class TEST {
 
-  private BAHNWAGON wagon1 = new BAHNWAGON("Passagierwagon");
-  private BAHNWAGON wagon2 = new BAHNWAGON("Lastwagon");
-  private KNOTEN knoten1 = new KNOTEN(null, wagon);
+  
   
   public static void main(String[] args) {
-    LOKOMOTIVE lok = new LOKOMOTIVE(knoten1);
-    System.out.println("Der Wagen + wagon2.wagonArtGeben() " + wurde angehängt: " + lok.wagonAnhaengen(wagon2));
-    System.out.println("Der Wagen + wagon2.wagonArtGeben() " + ist im Zug enthalten: " + lok.enthaeltWagon(wagon2));
-    System.out.println("Der Wagen + wagon2.wagonArtGeben() " + wurde abgekuppelt: " + lok.wagonAbkuppeln(wagon2));
-    System.out.println("Der Wagen an 0. Stelle ist: " + lok.wagonGeben(0);
+    BAHNWAGON wagon1 = new BAHNWAGON("Passagierwagon");
+    BAHNWAGON wagon2 = new BAHNWAGON("Lastwagon");
+    KNOTEN knoten1 = new KNOTEN(null, wagon1);
+    LOKOMOTIVE lok = new LOKOMOTIVE("E-Lok");
+    
+    System.out.println("Der Wagen " + wagon2.wagonArtGeben() + " wurde angehängt: " + lok.wagonAnhaengen(wagon2));
+    System.out.println("Der Wagen " + wagon2.wagonArtGeben() + " ist im Zug enthalten: " + lok.enthaeltWagon(wagon2));
+    System.out.println("Der Wagen " + wagon2.wagonArtGeben() + " wurde abgekuppelt: " + lok.wagonAbkuppeln(wagon2));
+    System.out.println("Der Wagen an 0. Stelle ist: " + lok.bahnwagonGeben(0).wagonArtGeben();
   }
 }
 ```
