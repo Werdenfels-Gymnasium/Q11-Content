@@ -40,6 +40,11 @@ public class KNOTEN {
     this.inhalt = inhalt;
   }
   
+  public KNOTEN(BAHNWAGON inhalt) {
+    this.naechster = null;
+    this.inhalt = inhalt;
+  }
+  
   public void naechsterSetzen(KNOTEN naechster) {
     if (!this.equals(naechster)) this.naechster = naechster;
   }
@@ -57,49 +62,65 @@ public class KNOTEN {
   }
 }
 ```
-#####LOKOMOTIVE.java
+#####ZUG.java
 
 ```java
-public class LOKOMOTIVE {
+public class ZUG {
   
-  private KNOTEN erster;
-  private int laenge = 1;
+  private KNOTEN lokomotive;
+  private int laenge = 0;
   
-  public LOKOMOTIVE(String lokArt) {
-    this.erster = new KNOTEN(null, new BAHNWAGON(lokArt));
+  public ZUG(String lokomotivenArt) {
+    this.lokomotive = new KNOTEN(new BAHNWAGON(lokomotivenArt));
   }
   
   public int wagenanzahlGeben() {
     return this.laenge;
   }
   
-  public boolean wagonEinfuegen(BAHNWAGON wagon, int index) {
-    KNOTEN currentKnoten = erster;
+  public int wagenanzahlBerechnen() {
+    KNOTEN currentKnoten = lokomotive;
+    int laenge = 1;
     
     while (currentKnoten.naechsterGeben() != null) {
-      if (index <= 0) {
-        currentKnoten.naechsterSetzen(new KNOTEN(currentKnoten.naechsterGeben(), wagon));
-        laenge++;
-        return true;
-      }
-      index--;
+      laenge++;
+      currentKnoten = currentKnoten.naechsterGeben();
     }
-    return false;
+    return laenge;
   }
   
-  public boolean wagonAnhaengen(BAHNWAGON wagon) {
-    KNOTEN currentKnoten = erster; 
+  public boolean wagonHintenAnhaengen(BAHNWAGON wagon) {
+    KNOTEN currentKnoten = lokomotive; 
           
     while (currentKnoten.naechsterGeben() != null) {
       currentKnoten = currentKnoten.naechsterGeben();
     }
-    currentKnoten.naechsterSetzen(new KNOTEN(null, wagon));
+    currentKnoten.naechsterSetzen(new KNOTEN(wagon));
+    laenge++;
+    return true;
+  }
+  
+  public boolean wagonVorneAnhaengen(BAHNWAGON wagon) {
+    lokomotive.naechsterSetzen(new KNOTEN(lokomotive.naechsterGeben(), wagon));
+    laenge++;
+    return true;
+  }
+  
+  public boolean wagonEinfuegen(BAHNWAGON wagon, int index) {
+    KNOTEN currentKnoten = lokomotive;
+
+    while (index > 0) {
+      if (currentKnoten.naechsterGeben() == null) return false;
+      currentKnoten = currentKnoten.naechsterGeben();
+      index--;  
+    }
+    currentKnoten.naechsterSetzen(new KNOTEN(currentKnoten.naechsterGeben(), wagon));
     laenge++;
     return true;
   }
   
   public int enthaeltWagon(BAHNWAGON wagon) {
-    KNOTEN currentKnoten = erster;
+    KNOTEN currentKnoten = lokomotive;
     int index = 0;
     
     while (!currentKnoten.inhaltGeben().equals(wagon)) {
@@ -109,7 +130,8 @@ public class LOKOMOTIVE {
       currentKnoten = currentKnoten.naechsterGeben();
       index++;
     }
-    return index;
+    //Abziehen des Lok-Wagons
+    return index - 1;
   }
   
   public boolean wagonAbkuppeln(BAHNWAGON wagon) {        
@@ -117,7 +139,7 @@ public class LOKOMOTIVE {
       
     if (index == -1) return false;
     
-    KNOTEN currentKnoten = erster;
+    KNOTEN currentKnoten = lokomotive;
     
     while (currentKnoten.naechsterGeben() != null) {
       if (!currentKnoten.naechsterGeben().inhaltGeben().equals(wagon)) {
@@ -137,7 +159,7 @@ public class LOKOMOTIVE {
   }
   
   private KNOTEN knotenGeben(int index) {
-    KNOTEN currentKnoten = erster;
+    KNOTEN currentKnoten = lokomotive;
     
     if (index < 0 && index >= laenge) {
       return null;
@@ -150,7 +172,7 @@ public class LOKOMOTIVE {
   }
   
   public BAHNWAGON bahnwagonGeben(int index) {
-    return knotenGeben(index).inhaltGeben();
+    return knotenGeben(index) != null ? knotenGeben(index).inhaltGeben() : null;
   }
 }
 ```
@@ -160,18 +182,9 @@ public class LOKOMOTIVE {
 ```java
 public class TEST {
 
-  
-  
-  public static void main(String[] args) {
-    BAHNWAGON wagon1 = new BAHNWAGON("Passagierwagon");
-    BAHNWAGON wagon2 = new BAHNWAGON("Lastwagon");
-    KNOTEN knoten1 = new KNOTEN(null, wagon1);
-    LOKOMOTIVE lok = new LOKOMOTIVE("E-Lok");
-    
-    System.out.println("Der Wagen " + wagon2.wagonArtGeben() + " wurde angehängt: " + lok.wagonAnhaengen(wagon2));
-    System.out.println("Der Wagen " + wagon2.wagonArtGeben() + " ist im Zug enthalten: " + lok.enthaeltWagon(wagon2));
-    System.out.println("Der Wagen " + wagon2.wagonArtGeben() + " wurde abgekuppelt: " + lok.wagonAbkuppeln(wagon2));
-    System.out.println("Der Wagen an 0. Stelle ist: " + lok.bahnwagonGeben(0).wagonArtGeben());
-  }
+    public BAHNWAGON pass = new BAHNWAGON("Passagierwagon");
+    public BAHNWAGON last = new BAHNWAGON("Lastwagon");
+    public BAHNWAGON gueter = new BAHNWAGON("Gueterwagon");
+    public LOKOMOTIVE eLok = new LOKOMOTIVE("E-Lok");
 }
 ```
