@@ -73,6 +73,20 @@ public class LOKOMOTIVE {
     return this.laenge;
   }
   
+  public boolean wagonEinfuegen(BAHNWAGON wagon, int index) {
+    KNOTEN currentKnoten = erster;
+    
+    while (currentKnoten.naechsterGeben() != null) {
+      if (index <= 0) {
+        currentKnoten.naechsterSetzen(new KNOTEN(currentKnoten.naechsterGeben(), wagon));
+        laenge++;
+        return true;
+      }
+      index--;
+    }
+    return false;
+  }
+  
   public boolean wagonAnhaengen(BAHNWAGON wagon) {
     KNOTEN currentKnoten = erster; 
           
